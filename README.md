@@ -42,5 +42,5 @@ This project has received funding from the European Union’s Horizon 2020 resea
 
 ---
 ## Legal information
-This project is licensed under the MIT license – see *[LICENSE.md](LICENSE.md)* in the repository for details.
+This project is licensed under the MIT license – see *[LICENSE.md](LICENSE)* in the repository for details.
 
