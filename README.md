@@ -28,7 +28,7 @@ Create a new environment in conda using the *environment.yml* file:
 ``` 
 conda env create --file environment.yml 
 ```
-Then you should be able to run the simulation file *[simulation.py](simulation.py)*. To adjust the problem, simply ammend the problem definition given in *[problem_definition.py](simulation.py)*. 
+Then you should be able to run the simulation file *[GP_NMPC_batch_simulation.py](GP_NMPC_batch_simulation.py)*. To adjust the problem, simply ammend the problem definition given in *[Problem_definition.py](Problem_definition.py)*. 
 
 ---
 ## Reference
