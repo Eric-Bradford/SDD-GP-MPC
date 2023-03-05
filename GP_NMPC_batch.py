@@ -13,7 +13,7 @@ from casadi import *
 from matplotlib.colors import LinearSegmentedColormap
 from scipy.spatial.distance import cdist
 import numpy.random as random
-import sobol_seq
+from scipy.stats import qmc
 from pyDOE import *
 from scipy.stats import beta
 import sys
@@ -96,9 +96,12 @@ class GP_batch:
         Xdat           = np.zeros((ndat0,nd+nu))
         Ydat           = np.zeros((ndat0,nd))
         nruns          = int(ndat0*deltat/tf)
-        udat1          = sobol_seq.i4_sobol_generate(nu,ndat0)
+        sampler_Sobol1 = qmc.Sobol(d=nu, scramble=True)
+        udat1          = sampler_Sobol1.random(ndat0)
+        
         x_min, x_max   = np.array([0.,50.,0.]), np.array([20.,800.,0.18])
-        Xdat           = sobol_seq.i4_sobol_generate(nu+nd,ndat0)
+        sampler_Sobol2 = qmc.Sobol(d=nu+nd, scramble=True)
+        Xdat           = sampler_Sobol2.random(ndat0)
         original       = False
 
         if original:
@@ -189,8 +192,9 @@ class GP_batch:
         ub               = np.array([3.]*(nX+1)  + [ 4.])
         bounds           = np.hstack((lb.reshape(nX+2,1),ub.reshape(nX+2,1)))
         multi_start      = self.multi_hyper
-        multi_startvec   = sobol_seq.i4_sobol_generate(nX+2,multi_start)
-
+        sampler_Sobol3   = qmc.Sobol(d=nX+2, scramble=True)
+        multi_startvec   = sampler_Sobol3.random(multi_start)
+    
         options  = {'disp':False,'maxiter':10000}
         hypopt   = np.zeros((nX+2,nd))
         localsol = [0.]*multi_start
